@@ -10,6 +10,8 @@
   "author": "Kiselev",
   "license": "ISC",
   "dependencies": {
+    "html_helper_works_with_elem": "^1.0.0",
+    "html_works_with_elem": "^1.0.0",
     "uuid": "^11.1.0"
   }
 }

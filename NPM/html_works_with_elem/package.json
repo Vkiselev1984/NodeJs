@@ -1,0 +1,12 @@
+{
+  "name": "html_works_with_elem",
+  "version": "1.0.0",
+  "description": "A simple library for working with HTML elements.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["html", "helper", "library"],
+  "author": "Vladimir Kiselev",
+  "license": "MIT"
+}

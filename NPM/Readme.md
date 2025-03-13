@@ -296,3 +296,165 @@ Now you understand that the code in the project can be written in different file
 In general, if you look at the source code of any npm package, you can see that npm packages are structured exactly the same as our own math.js module.
 
 For example, the v4 function of the uuid package is a function that is exported by the main module of the package.
+
+### Publishing your own package
+
+Before publishing your package, let's figure out how to search and view other users' packages. To do this, go to the [official NPM website](https://www.npmjs.com/) and enter any package name you need in the search bar.
+
+For example, if you enter the word math, we will see a number of packages that contain the word math in the name, description, or tags.
+
+Once we create our package, we will also be able to see it in the search results.
+
+Now let's create a new npm project. Let's follow the steps we did before:
+
+1. Initialize the project in folder npm_library
+
+```bash
+mkdir html_works_with_elem
+cd html_works_with_elem
+npm init -y
+```
+
+2. Let's create a library file index.js and add the following code:
+
+```javascript
+// index.js
+
+/**
+ * Creates a new HTML element.
+ * @param {string} tag - The element's tag name.
+ * @param {Object} attributes - The attributes object for the element.
+ * @param {string} innerHTML - The inner HTML for the element.
+ * @returns {HTMLElement} - The created element.
+ */
+function createElement(tag, attributes = {}, innerHTML = "") {
+  const element = document.createElement(tag);
+  for (const key in attributes) {
+    element.setAttribute(key, attributes[key]);
+  }
+  element.innerHTML = innerHTML;
+  return element;
+}
+
+/**
+ * Adds a class to the element.
+ * @param {HTMLElement} element - The element to add the class to.
+ * @param {string} className - The name of the class.
+ */
+function addClass(element, className) {
+  element.classList.add(className);
+}
+
+/**
+ * Removes a class from an element.
+ * @param {HTMLElement} element - The element to remove the class from.
+ * @param {string} className - The class name.
+ */
+function removeClass(element, className) {
+  element.classList.remove(className);
+}
+
+/**
+ * Sets an attribute of an element.
+ * @param {HTMLElement} element - The element to add the attribute to.
+ * @param {string} attribute - The attribute name.
+ * @param {string} value - The attribute value.
+ */
+function setAttribute(element, attribute, value) {
+  element.setAttribute(attribute, value);
+}
+
+/**
+ * Removes an element from the DOM.
+ * @param {HTMLElement} element - The element to remove.
+ */
+function removeElement(element) {
+  if (element.parentNode) {
+    element.parentNode.removeChild(element);
+  }
+}
+
+// Export functions
+module.exports = {
+  createElement,
+  addClass,
+  removeClass,
+  setAttribute,
+  removeElement,
+};
+```
+
+3. Let's update package.json
+
+```json
+{
+  "name": "html_works_with_elem",
+  "version": "1.0.0",
+  "description": "A simple library for working with HTML elements.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["html", "helper", "library"],
+  "author": "Vladimir Kiselev",
+  "license": "MIT"
+}
+```
+
+4. Let's create README.md
+
+- [Readme.md](./html_works_with_elem/README.md)
+
+5. Published on NPM
+
+```bash
+npm login
+npm publish
+```
+
+6. Let's test our library
+
+```bash
+cd ..
+npm install html-works-with-elem
+```
+
+![add_library](./img/add_library.png)
+
+Create [test.js](./test_library/) file in directory [test_library](./test_library/):
+
+```javascript
+const {
+  createElement,
+  addClass,
+  removeClass,
+  setAttribute,
+  removeElement,
+} = require("html_works_with_elem"); // Make sure the library path is correct
+
+// Create a new element
+const newDiv = createElement(
+  "div",
+  { class: "my-class", id: "my-div" },
+  "Hello, world!"
+);
+console.log(newDiv); // Outputs: <div class="my-class" id="my-div">Hello, world!</div>
+
+// Add a class
+const updatedDiv = addClass(newDiv, "another-class");
+console.log(updatedDiv); // Outputs: <div class="my-class another-class" id="my-div">Hello, world!</div>
+
+// Remove a class
+const withoutClass = removeClass(updatedDiv, "my-class");
+console.log(withoutClass); // Outputs: <div class="another-class" id="my-div">Hello, world!</div>
+
+// Set the attribute
+const elementWithAttr = setAttribute(withoutClass, "data-info", "some data");
+console.log(elementWithAttr); // Outputs: <div class="another-class" id="my-div" data-info="some data">Hello, world!</div>
+
+// Remove the element
+const removedElement = removeElement();
+console.log(removedElement); // Outputs: ''
+```
+
+![test library](./img/test_library.png)
