@@ -1,17 +1,15 @@
 const http = require('http');
 
-const hostname = '127.0.0.1'; // Or '0.0.0.0' for access from other devices
+const hostname = '127.0.0.1'; // Или '0.0.0.0' для доступа с других устройств
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-    // Get the URL path from the request
+    // Получаем путь URL из запроса
     const path = req.url;
 
-    // Set the default response code
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-
-    // Route handling
+    // Обработка маршрутов
     if (path === '/home') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(`
             <!DOCTYPE html>
             <html lang="en">
@@ -32,6 +30,7 @@ const server = http.createServer((req, res) => {
             </html>
         `);
     } else if (path === '/about') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(`
             <!DOCTYPE html>
             <html lang="en">
@@ -52,7 +51,7 @@ const server = http.createServer((req, res) => {
             </html>
         `);
     } else {
-        // Handle 404 Not Found
+        // Обработка 404 Not Found
         res.writeHead(404, { 'Content-Type': 'text/html' });
         res.end(`
             <!DOCTYPE html>
@@ -76,7 +75,7 @@ const server = http.createServer((req, res) => {
     }
 });
 
-// Start the server
+// Запуск сервера
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
