@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "Node.js is a platform that allows developers to write server-side programs in JavaScript. Node.js is not a programming language or a framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./index.js"
+  },
+  "author": "Kiselev",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "uuid": "^11.1.0"
+  },
+  "keywords": []
+}
