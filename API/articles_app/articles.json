@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "title": "My first article",
+    "content": "This is my first post to test the app"
+  },
+  {
+    "id": 2,
+    "title": "My second article",
+    "content": "This is the second post to fill the application with content and test its functionality"
+  }
+]
